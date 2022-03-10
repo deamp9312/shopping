@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <style>
+        .container {
+            max-width: 560px;
+        }
+
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+<form th:action="@{/members/new}" th:object="${member}" method="post">
+
+    <div th:if="${#fields.hasGlobalErrors()}">
+        <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+           th:text="${err}">전체 오류 메시지</p>
+    </div>
+
+    <div>
+        <label th:for="usrId" th:text="#{member.userId}"> 아이디 </label> :
+        <input th:field="*{userId}" th:errorclass="field-error"
+               placeholder="이메일 입력" autofocus>
+        <div class="field-error" th:errors="*{userId}">
+            아이디 오류
+        </div>
+    </div>
+
+    <div>
+        <label th:for="password" th:text="#{member.password}"> 비밀번호 :</label> :
+        <input th:field="*{password}" th:errorclass="field-error"
+               placeholder="비밀번호">
+        <div class="field-error" th:errors="*{password}">
+            비밀번호 오류
+        </div>
+    </div>
+
+
+    <div>
+        <label th:for="userName" th:text="#{member.userName}"> 사용자 이름 :</label> :
+        <input th:field="*{userName}" th:errorclass="field-error"
+               placeholder="사용자 이름">
+        <div class="field-error" th:errors="*{userName}">
+            사용자 이름 오류
+        </div>
+    </div>
+    <button type="submit">
+        <a th:text="#{button.save}">회원 가입</a>
+    </button>
+    <button type="button" th:onclick="|location.href='@{/}'|">
+        <a th:text="#{button.cancel}">취소</a>
+    </button>
+
+</form>
+
+
+
+</body>
+</html>

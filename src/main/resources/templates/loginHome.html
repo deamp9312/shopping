@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>login Home</title>
+</head>
+<body>
+
+<h4 th:text="|로그인: ${member.userId}|">로그인 사용자 이름</h4>
+
+
+<button type="button"
+        th:onclick="|location.href='@{/items}'|">
+    <a th:text="#{button.moveBoard}">상품 관리</a>
+</button>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">
+        <a th:text="#{button.logout}">로그아웃</a>
+    </button>
+</form>
+
+</body>
+</html>
