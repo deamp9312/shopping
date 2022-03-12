@@ -11,20 +11,22 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberServices {
 
     private final MemberJpaRepository memberJpaRepository;
 
 
     @Transactional
-    public String saveMember(MemberSaveForm memberSaveForm) {
-        MemberEntity newMember = new MemberEntity(memberSaveForm.getUserId().replaceAll(" ",""), memberSaveForm.getPassword().replaceAll(" ",""), memberSaveForm.getUserName().replaceAll(" ",""));
-        MemberEntity findMember = memberJpaRepository.findByUserId(memberSaveForm.getUserId());
+    public String saveMember(MemberEntity newMember) {
+
+        MemberEntity findMember = memberJpaRepository.findByUserId(newMember.getUserId());
         if (findMember != null) {
             return null;
         }
         return memberJpaRepository.save(newMember).getUserName();
     }
+
 
     public Object findMember(String userId, String password) {
         MemberEntity findMember = memberJpaRepository.findByUserId(userId);
@@ -32,7 +34,6 @@ public class MemberServices {
         if(findMember==null){
             return "없는 사용자 입니다";
         }
-
 
         if (password.equals(findMember.getPassword())) {
             return findMember;

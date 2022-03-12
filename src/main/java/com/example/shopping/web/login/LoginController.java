@@ -49,12 +49,14 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
+
         return "redirect:" + redirectURL;
     }
 
     @PostMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
+
         if (session != null) {
             session.invalidate();
         }

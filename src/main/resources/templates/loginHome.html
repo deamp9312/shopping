@@ -8,15 +8,14 @@
 
 <h4 th:text="|로그인: ${member.userId}|">로그인 사용자 이름</h4>
 
-
-<button type="button"
-        th:onclick="|location.href='@{/items}'|">
-    <a th:text="#{button.moveBoard}">상품 관리</a>
-</button>
+    <button type="button"
+            th:onclick="|location.href='@{/board}'|">
+        <a th:text="#{label.button.board.manage}">메모장 관리</a>
+    </button>
 
 <form th:action="@{/logout}" method="post">
     <button type="submit">
-        <a th:text="#{button.logout}">로그아웃</a>
+        <a th:text="#{label.button.logout}">로그아웃</a>
     </button>
 </form>
 

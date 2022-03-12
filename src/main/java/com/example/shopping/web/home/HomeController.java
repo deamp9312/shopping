@@ -13,6 +13,7 @@ public class HomeController {
     @GetMapping("/")
     public String home(@Login MemberEntity loginMember, Model model) {
 
+
         if (loginMember == null) {
             return "home";
         }

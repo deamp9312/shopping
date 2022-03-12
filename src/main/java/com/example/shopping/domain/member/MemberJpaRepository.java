@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MemberJpaRepository extends JpaRepository<MemberEntity, Long> {
 
     MemberEntity findByUserId(String userid);
+    MemberEntity findMemberById(Long id);
 
 }

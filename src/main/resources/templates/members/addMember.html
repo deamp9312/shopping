@@ -25,7 +25,7 @@
     </div>
 
     <div>
-        <label th:for="usrId" th:text="#{member.userId}"> 아이디 </label> :
+        <label th:for="usrId" th:text="#{label.member.userid}"> 아이디 </label> :
         <input th:field="*{userId}" th:errorclass="field-error"
                placeholder="이메일 입력" autofocus>
         <div class="field-error" th:errors="*{userId}">
@@ -34,7 +34,7 @@
     </div>
 
     <div>
-        <label th:for="password" th:text="#{member.password}"> 비밀번호 :</label> :
+        <label th:for="password" th:text="#{label.member.password}"> 비밀번호 :</label> :
         <input th:field="*{password}" th:errorclass="field-error"
                placeholder="비밀번호">
         <div class="field-error" th:errors="*{password}">
@@ -44,7 +44,7 @@
 
 
     <div>
-        <label th:for="userName" th:text="#{member.userName}"> 사용자 이름 :</label> :
+        <label th:for="userName" th:text="#{label.member.username}"> 사용자 이름 :</label> :
         <input th:field="*{userName}" th:errorclass="field-error"
                placeholder="사용자 이름">
         <div class="field-error" th:errors="*{userName}">
@@ -52,10 +52,10 @@
         </div>
     </div>
     <button type="submit">
-        <a th:text="#{button.save}">회원 가입</a>
+        <a th:text="#{label.button.save}">회원 가입</a>
     </button>
     <button type="button" th:onclick="|location.href='@{/}'|">
-        <a th:text="#{button.cancel}">취소</a>
+        <a th:text="#{label.button.cancel}">취소</a>
     </button>
 
 </form>
