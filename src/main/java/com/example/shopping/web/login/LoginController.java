@@ -32,9 +32,11 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String MemberLogin(@Validated @ModelAttribute("member") LoginMemberForm memberLoginForm,
-                              BindingResult bindingResult
-            , @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request) {
+    public String MemberLogin(@RequestParam(defaultValue = "/")String redirectURL,
+            @Validated @ModelAttribute("member") LoginMemberForm memberLoginForm,
+                              BindingResult bindingResult,
+                              HttpServletRequest request) {
+        System.out.println("redirectURL = " + redirectURL);
 
         if (bindingResult.hasErrors()) {
             return "/members/loginForm";
@@ -48,6 +50,7 @@ public class LoginController {
 
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        System.out.println("redirectURL = " + redirectURL);
 
 
         return "redirect:" + redirectURL;

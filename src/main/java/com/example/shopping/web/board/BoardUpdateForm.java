@@ -6,7 +6,7 @@ import lombok.Data;
 public class BoardUpdateForm {
 
 
-    private String type;    //장르
+    private String writer;    //장르
 
     private String title;   //제목
 

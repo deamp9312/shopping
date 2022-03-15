@@ -5,6 +5,7 @@ import com.example.shopping.BaseTimeEntity;
 import com.example.shopping.domain.member.MemberEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 
@@ -47,9 +48,12 @@ public class BoardsEntity extends BaseTimeEntity {
     MemberEntity member = new MemberEntity();
 
 
-
-    public void inputMember(MemberEntity member){
-        this.member=member;
+    public void setMember(MemberEntity member) {
+        if(this.member != null) {
+            this.member.getBoards().remove(this);
+        }
+        this.member = member;
+        member.getBoards().add(this);
     }
 
     @Override
@@ -65,9 +69,8 @@ public class BoardsEntity extends BaseTimeEntity {
                 '}';
     }
 
-    public static BoardsEntity CreateBoard(String writer, String title, String text, MemberEntity member) {
+    public BoardsEntity CreateBoard(String writer, String title, String text) {
         BoardsEntity board = new BoardsEntity();
-        board.inputMember(member);
         board.writer = writer;
         board.title =title;
         board.text = text;

@@ -29,11 +29,6 @@ public class BoardController {
     @GetMapping
     public String boardList(Model model) {
         List<BoardsEntity> boards = boardServices.findAllBoard();
-
-        for (BoardsEntity board : boards) {
-            System.out.println("board = " + board);
-        }
-
         model.addAttribute("boards", boards);
         return "/board/boards";
     }
@@ -42,25 +37,22 @@ public class BoardController {
     @GetMapping("/add")
     public String boards(@ModelAttribute("board") BoardSaveForm boardSaveForm) {
 
-        return "board/newBoardForm";
+        return "board/addForm";
     }
     @PostMapping("/add")
     public String newBoard(@Validated @ModelAttribute("board") BoardSaveForm boardSaveForm, BindingResult bindingResult
             , RedirectAttributes redirectAttributes, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
-            return "/board/newBoardForm";
+            return "/board/addForm";
         }
-
         HttpSession session = request.getSession(false);
-
         MemberEntity MemberAttribute = (MemberEntity) session.getAttribute(SessionConst.LOGIN_MEMBER);
         Long Member_id = MemberAttribute.getId();
 
-        System.out.println("Member_id = " + Member_id);
 
-        BoardsEntity newBoard = BoardsEntity.CreateBoard
-                (boardSaveForm.getType(), boardSaveForm.getTitle(),
-                boardSaveForm.getText(),MemberAttribute);
+        BoardsEntity newBoard = new BoardsEntity().CreateBoard
+                (MemberAttribute.getUserName(), boardSaveForm.getTitle(),
+                boardSaveForm.getText());
 
 
         Long id = boardServices.saveBoard(newBoard, Member_id);
@@ -76,14 +68,12 @@ public class BoardController {
     public String board(@PathVariable Long board_id, Model model) {
         BoardsEntity findBoad = boardServices.findBoard(board_id);
         model.addAttribute("board", findBoad);
-        return "board";
+        return "board/board";
     }
 
 
-
     @GetMapping("/{board_id}/edit")
-    public String editBoard(@PathVariable Long board_id,
-                            Model model) {
+    public String editBoard(@PathVariable Long board_id, Model model) {
         BoardsEntity board = boardServices.findBoard(board_id);
         model.addAttribute("board", board);
         return "board/editForm";
@@ -94,16 +84,27 @@ public class BoardController {
                             @Validated @ModelAttribute("board")BoardUpdateForm form,
                             BindingResult bindingResult,HttpServletRequest request){
 
+   /*     HttpSession session = request.getSession(false);
+        MemberEntity MemberAttribute = (MemberEntity) session.getAttribute(SessionConst.LOGIN_MEMBER);
+*/
+//        BoardsEntity board = boardServices.findBoard(board_id);
+
+/*
+        if (!board.getMember().equals(MemberAttribute.getUserName())) {
+            bindingResult.reject("editFail", "글 수정은 본인만 가능합니다.");
+            return "/board/board";
+        }*/
+
+
         if(bindingResult.hasErrors()){
             return "board/editForm";
         }
 
-        HttpSession session = request.getSession(false);
+     HttpSession session = request.getSession(false);
         MemberEntity MemberAttribute = (MemberEntity) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-
-        BoardsEntity boards = BoardsEntity.CreateBoard
-                (form.getType(), form.getTitle(), form.getText(),MemberAttribute);
+        BoardsEntity boards = new  BoardsEntity().CreateBoard
+                (MemberAttribute.getUserName(), form.getTitle(), form.getText());
         Long editBoard_id = boardServices.updateBoard(boards);
 
         return "redirect:/board/"+editBoard_id;

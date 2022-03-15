@@ -27,9 +27,9 @@ public class MemberEntity extends BaseTimeEntity {
 
     private String userName;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "member")
     List<BoardsEntity> boards = new ArrayList<>();
+
 
 
 
@@ -38,8 +38,8 @@ public class MemberEntity extends BaseTimeEntity {
         this.password = password;
         this.userName=userName;
     }
-    public void addBoardMember(BoardsEntity board){
-        this.boards.add(board);
-        board.inputMember(this);
-    }
+
+
+
+
 }

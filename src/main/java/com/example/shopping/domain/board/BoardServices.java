@@ -22,12 +22,10 @@ public class BoardServices {
     public Long saveBoard(BoardsEntity board, Long member_id) {
         MemberEntity member = memberJpaRepository.findMemberById(member_id);
 
-        board.member.addBoardMember(board);
-
+        board.setMember(member);
         BoardsEntity savedBoard = boardJpaRepository.save(board);
 
         return savedBoard.getId();
-
     }
 
     public List<BoardsEntity> findAllBoard(){

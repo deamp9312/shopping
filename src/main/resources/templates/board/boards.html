@@ -25,18 +25,18 @@
         <table class="table">
             <thead>
             <tr>
-                <th th:text="#{label.board.id}">글 번호</th>
-                <th th:text="#{label.board.Writer}">작성자</th>
-                <th th:text="#{label.board.title}">제목</th>
-                <th th:text="#{label.board.like}">좋아요 상태</th>
-                <th th:text="#{label.board.visit}">방문자 수</th>
+                <th th:text="#{label.board.id}">글 번호 </th>
+                <th th:text="#{label.board.Writer}">작성자  </th>
+                <th th:text="#{label.board.title}">제목    </th>
+                <th th:text="#{label.board.like}"> 좋아요 상태 </th>
+                <th th:text="#{label.board.visit}"> 방문자 수 </th>
             </tr>
             </thead>
             <tbody>
             <tr th:each= "board : ${boards}">
-                <td><a th:href="@{/board/{board_id}(board_id=${board.id})}" th:text="${board.id}">글 번호</a></td>
-                <td><a th:href="@{|/board/${board.id()}|}" th:text="${board.writer}">작성자</a></td>
-                <td><a th:href="@{|/board/${board.id()}|}" th:text="${board.title}">제목</a></td>
+                <td><a th:href="@{/board/{id}(id=${board.id})}" th:text="${board.id}">글 번호</a></td>
+                <td><a th:href="@{|/board/${board.id}|}" th:text="${board.writer}">작성자</a></td>
+                <td><a th:href="@{|/board/${board.id}|}" th:text="${board.title}">제목</a></td>
                 <td th:text="${board.like_status}">좋아요 상태</td>
                 <td th:text="${board.visit}">방문자 수</td>
             </tr>
