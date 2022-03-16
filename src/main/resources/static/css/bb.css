@@ -1,0 +1,45 @@
+body {
+    background-color: #34495e;
+}
+.addForm {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+.InputForm {
+    margin-bottom: 20px;
+    color: white;
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.InputForm > input {
+    border: none;
+    height: 30px;
+    width: 250px;
+    border-radius: 5px;
+}
+.input_button {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    height:2em;
+}
+.join_button{
+    width:100px;
+    margin:0 10px;
+    background-color:rgba(255,255,255);
+    border:none;
+    border-radius:5px;
+}
+.cancle_button{
+    width:100px;
+    margin:0 10px;
+    background-color:rgba(255,255,255);
+    border:none;
+    border-radius:5px;
+}

@@ -43,15 +43,12 @@ public class BoardServices {
         BoardsEntity searchBoard = boardJpaRepository.findBoard(board_id);
 
 
+
 //        searchBoard.member.addBoardMember();
 
     }
 
-    @Transactional
-    public Long updateBoard(BoardsEntity boards){
-        BoardsEntity savedBoard = boardJpaRepository.save(boards);
-        return savedBoard.getId();
-    }
+
 
 
 }

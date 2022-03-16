@@ -43,7 +43,8 @@ public class BoardsEntity extends BaseTimeEntity {
 
     private Long visit; //방문 횟수수 아직 구현 x
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id")
     MemberEntity member = new MemberEntity();
 

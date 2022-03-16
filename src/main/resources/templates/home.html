@@ -2,12 +2,26 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/css/aa.css}"
+          rel="stylesheet">
     <title>Title</title>
 </head>
 <body>
 <!--회원 가입 링크-->
-<h2 th:if="${param.status}" th:text="'저장 완료'"></h2>
-<a th:href="@{/members/new}">회원가입</a>
-<a th:href="@{/members/login}">로그인</a>
+
+<!--<h2 th:if="${param.status}" th:text="'저장 완료'"></h2>-->
+
+<div class="box">
+    <h2 th:if="${param.status}" th:text="'저장 완료'"></h2>
+    <div class="form">
+
+        <button class="join" th:onclick="|location.href='@{/members/new}'|">회원가입</button>
+        <button class="login" th:onclick="|location.href='@{/members/login}'|">로그인</button>
+    </div>
+</div>
 </body>
 </html>
+
+
+
+

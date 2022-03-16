@@ -39,6 +39,7 @@ public class BoardController {
 
         return "board/addForm";
     }
+
     @PostMapping("/add")
     public String newBoard(@Validated @ModelAttribute("board") BoardSaveForm boardSaveForm, BindingResult bindingResult
             , RedirectAttributes redirectAttributes, HttpServletRequest request) {
@@ -52,7 +53,7 @@ public class BoardController {
 
         BoardsEntity newBoard = new BoardsEntity().CreateBoard
                 (MemberAttribute.getUserName(), boardSaveForm.getTitle(),
-                boardSaveForm.getText());
+                        boardSaveForm.getText());
 
 
         Long id = boardServices.saveBoard(newBoard, Member_id);
@@ -81,8 +82,8 @@ public class BoardController {
 
     @PostMapping("/{board_id}/edit")
     public String editBoard(@PathVariable Long board_id,
-                            @Validated @ModelAttribute("board")BoardUpdateForm form,
-                            BindingResult bindingResult,HttpServletRequest request){
+                            @Validated @ModelAttribute("board") BoardUpdateForm form,
+                            BindingResult bindingResult, HttpServletRequest request) {
 
    /*     HttpSession session = request.getSession(false);
         MemberEntity MemberAttribute = (MemberEntity) session.getAttribute(SessionConst.LOGIN_MEMBER);
@@ -96,17 +97,21 @@ public class BoardController {
         }*/
 
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "board/editForm";
         }
 
-     HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(false);
         MemberEntity MemberAttribute = (MemberEntity) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        Long Member_id = MemberAttribute.getId();
+        System.out.println("MemberAttribute = " + MemberAttribute);
 
-        BoardsEntity boards = new  BoardsEntity().CreateBoard
+
+        BoardsEntity boards = new BoardsEntity().CreateBoard
                 (MemberAttribute.getUserName(), form.getTitle(), form.getText());
-        Long editBoard_id = boardServices.updateBoard(boards);
 
-        return "redirect:/board/"+editBoard_id;
+        Long editBoard_id = boardServices.saveBoard(boards,Member_id);
+
+        return "redirect:/board/" + editBoard_id;
     }
 }

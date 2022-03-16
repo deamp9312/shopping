@@ -31,7 +31,15 @@ public class MemberEntity extends BaseTimeEntity {
     List<BoardsEntity> boards = new ArrayList<>();
 
 
-
+    @Override
+    public String toString() {
+        return "MemberEntity{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", password='" + password + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 
     public MemberEntity(String userId, String password, String userName) {
         this.userId = userId;

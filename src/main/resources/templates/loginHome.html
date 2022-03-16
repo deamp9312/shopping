@@ -2,22 +2,28 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/css/aa.css}"
+          rel="stylesheet">
     <title>login Home</title>
 </head>
 <body>
 
-<h4 th:text="|로그인: ${member.userId}|">로그인 사용자 이름</h4>
+<div class="box">
+    <h2 th:text="|로그인: ${member.userId}|">로그인 사용자 이름</h2>
+    <div class="form">
+        <button class="join" type="button"
+                th:onclick="|location.href='@{/board}'|">
+            <a th:text="#{label.button.board.manage}">메모장 관리</a>
+        </button>
 
-    <button type="button"
-            th:onclick="|location.href='@{/board}'|">
-        <a th:text="#{label.button.board.manage}">메모장 관리</a>
-    </button>
+        <form class="login-body" th:action="@{/logout}" method="post">
+            <button class="login" type="submit">
+                <a th:text="#{label.button.logout}">로그아웃</a>
+            </button>
+        </form>
 
-<form th:action="@{/logout}" method="post">
-    <button type="submit">
-        <a th:text="#{label.button.logout}">로그아웃</a>
-    </button>
-</form>
 
+    </div>
+</div>
 </body>
 </html>

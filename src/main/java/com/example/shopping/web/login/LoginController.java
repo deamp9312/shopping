@@ -36,10 +36,12 @@ public class LoginController {
             @Validated @ModelAttribute("member") LoginMemberForm memberLoginForm,
                               BindingResult bindingResult,
                               HttpServletRequest request) {
-        System.out.println("redirectURL = " + redirectURL);
-
         if (bindingResult.hasErrors()) {
             return "/members/loginForm";
+        }
+
+        if(redirectURL.equals("/members/login")){
+            redirectURL = "/";
         }
 
         Object loginMember = memberServices.findMember(memberLoginForm.getUserId(), memberLoginForm.getPassword());
@@ -47,12 +49,9 @@ public class LoginController {
             bindingResult.reject("loginFail", (String) loginMember);
             return "/members/loginForm";
         }
-
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
         System.out.println("redirectURL = " + redirectURL);
-
-
         return "redirect:" + redirectURL;
     }
 
