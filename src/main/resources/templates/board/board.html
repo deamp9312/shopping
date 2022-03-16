@@ -19,8 +19,11 @@
     </div>
 
 
+
+
     <!-- 추가 -->
     <h2 th:if="${param.status}" th:text="'저장 완료'"></h2>
+    <h2 th:unless="${param.status}" th:text="'본인의 글만 수정할수 있습니다'"></h2>
 
     <div>
         <label th:text="#{label.board.id}">식별 ID</label>

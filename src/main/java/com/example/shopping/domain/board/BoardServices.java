@@ -37,18 +37,12 @@ public class BoardServices {
         return boardJpaRepository.findBoard(board_id);
     }
 
+
     @Transactional
-    public void updateLike(Long board_id,String like){
-        //like가 1일때 이미 하트 누른유저이고 아니면 0임
-        BoardsEntity searchBoard = boardJpaRepository.findBoard(board_id);
-
-
-
-//        searchBoard.member.addBoardMember();
+    public void viewCountUp(Long board_key) {
+        Optional<BoardsEntity> board = boardJpaRepository.findById(board_key);
+        Long visit = board.get().getVisit();
+        board.get().ChangeVisit(++visit);
 
     }
-
-
-
-
 }

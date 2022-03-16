@@ -14,11 +14,17 @@
 
     <div class="row">
         <div class="col">
+            <form th:action="@{/logout}" method="post">
+                <button class="btn btn-primary float-end" type="submit">
+                    <a th:text="#{label.button.logout}">로그아웃  </a>
+                </button>
+            </form>
             <button class="btn btn-primary float-end"
                     th:onclick="|location.href='@{/board/add}'|"
-                    type="button" th:text="#{page.addBoard}">신규 메모</button>
+                    type="button" th:text="#{page.addBoard}">신규 메모  </button>
         </div>
     </div>
+
 
     <hr class="my-4">
     <div>
